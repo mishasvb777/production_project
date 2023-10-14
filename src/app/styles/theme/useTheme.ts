@@ -8,6 +8,7 @@ interface UseThemeResult {
   theme: Theme;
 }
 
+//Хук для изменения темы приложения 
 export function useTheme(): UseThemeResult {
   const {theme, setTheme} = useContext(ThemeContext) // получаем то что мы передали через контекст
 

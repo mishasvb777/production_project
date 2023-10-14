@@ -7,3 +7,4 @@ export function buildResolvers (): ResolveOptions {
     extensions: ['.tsx', '.ts', '.js'], // это расширение тех файлов, при импорте которых мы не будем указывать расширение этих файлов
   }
 }
+
