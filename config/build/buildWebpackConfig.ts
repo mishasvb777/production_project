@@ -26,7 +26,7 @@ export function buildWebpackConfig(options: BuildOptions): webpack.Configuration
     module: {  //  module используется для определения правил обработки различных типов файлов. 
         rules: buildLoaders(options), // вызов функции из папки build которая возвращает нам лоадеры
     },
-    resolve: buildResolvers(), // resolve - определение какие расширения фалйов должны быть автоматически разрешены при импорте модулей 
+    resolve: buildResolvers(options), // resolve - определение какие расширения фалйов должны быть автоматически разрешены при импорте модулей 
     // import MyComponent from './components/MyComponent'; вместо: import MyComponent from './components/MyComponent.jsx';
     devtool: isDev ? 'inline-source-map' : undefined, // необходим для того что четко видеть в каком файле произошла ошибка, с помощью тернарного оператора и опции 
     // isDev мы можем указывать если режим development то подключи опцию, если production то отключим

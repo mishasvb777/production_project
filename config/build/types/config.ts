@@ -9,6 +9,7 @@ export interface BuildPaths {
   entry: string; // путь до энтри поинт
   build: string; // путь до папки сборки
   html: string;  // путь до папки HTML которая лежит в папке public
+  src: string;
 }
 
 export interface BuildEnv { // интерфейс для переменных окружения, которые мы используем когда вызываем функцию которая возвращает config в файле webpack.config.ts
@@ -19,6 +20,6 @@ export interface BuildEnv { // интерфейс для переменных о
 export interface BuildOptions {
   mode: BuildMode; // режим сборки проекта 
   paths: BuildPaths; // ПУТИ, путь до энтри поинта, путь до сборки проекта, любые пути которые будут использоваться 
-  isDev: boolean; // isDev будет ровняться true если mode у нас продакшен
+  isDev: boolean; // isDev будет ровняться true если mode у нас продакшен  
   port: number;
 }

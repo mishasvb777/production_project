@@ -17,18 +17,19 @@ export default (env: BuildEnv) => { // возвращаем функцию дл�
     entry: path.resolve(__dirname, 'src', 'index.tsx'), 
     build: path.resolve(__dirname, 'build'),
     html: path.resolve(__dirname, 'public', 'index.html'), 
+    src: path.resolve(__dirname, 'src'),  
   }
   
   const mode = env.mode || 'development'; // теперь у нас мод зависит от того каким скриптом мы запускаем build, "build:prod" или "build:dev"  
   const isDev = mode === 'development' 
   const PORT = env.port || 3000 // env.port - это переменная окружения которые мы прописываем в скриптах запуска в файле package.json (--env port=3000)
   
-  const config : webpack.Configuration = buildWebpackConfig({ // эта функция будет возвращать нам наш конфиг, с опциями которыми мы будем туда передавать
-    mode,
-    paths,
-    isDev, // здесь будет true когда mode будет равно development, если isDev false то mode у нас production
-    port: PORT
-  })
+  const config : webpack.Configuration = buildWebpackConfig({
+  mode,
+  paths,
+  isDev,
+  port: PORT,  
+})
 
   return config;
 };
