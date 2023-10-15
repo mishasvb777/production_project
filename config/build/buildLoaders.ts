@@ -3,8 +3,22 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { BuildOptions } from "./types/config"
 // Простая функция которая будет возвращать нам список лоадеров
 
-export function buildLoaders ({isDev}: BuildOptions): webpack.RuleSetRule[] {
- 
+export function buildLoaders ({isDev}: BuildOptions): webpack.RuleSetRule[] {  
+  const fileLoader = {
+    test: /\.(png|jpe?g|gif|woff2|woff)$/i,
+    use: [
+      {
+        loader: 'file-loader',
+      },
+    ],
+  }
+
+  const svgLoader = {
+    test: /\.svg$/i,
+    issuer: /\.[jt]sx?$/,
+    use: ['@svgr/webpack'],
+  }
+
   const cssLoader = { // лоадер для scss файлов 
     test: /\.s[ac]ss$/i,
     use: [
@@ -38,7 +52,9 @@ export function buildLoaders ({isDev}: BuildOptions): webpack.RuleSetRule[] {
 
   return [
     typescriptLoader, 
-    cssLoader
+    cssLoader,
+    svgLoader,
+    fileLoader
   ]
 }
 
