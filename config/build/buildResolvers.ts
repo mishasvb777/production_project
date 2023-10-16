@@ -1,8 +1,7 @@
-import { ResolveOptions } from "webpack";
-import { BuildOptions } from "./types/config";
+import { type ResolveOptions } from 'webpack'
+import { type BuildOptions } from './types/config'
 
 export function buildResolvers (options: BuildOptions): ResolveOptions {
-
   return {
     preferAbsolute: true, // абсолютные пути в приоритете
     extensions: ['.tsx', '.ts', '.js'], // это расширение тех файлов, при импорте которых мы не будем указывать расширение этих файлов
@@ -11,4 +10,3 @@ export function buildResolvers (options: BuildOptions): ResolveOptions {
     alias: {}
   }
 }
-
