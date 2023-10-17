@@ -1,8 +1,7 @@
-module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
+export const env = {
+  browser: true,
+  es2021: true,
+  jest: false,
   extends: [
     'plugin:react/recommended',
     'plugin:i18next/recommended'
@@ -40,4 +39,4 @@ module.exports = {
   globals: {
     __IS_DEV__: true,
   },
-}
+};
