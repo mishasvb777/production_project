@@ -1,4 +1,9 @@
 {
   "Тестовый перевод" : "Test translate",
-  "Язык" : "Русский"  
+  "Язык" : "English",
+  "Страница не найдена": "Page Not Found",  
+  "Главная" : "Main",
+  "О сайте" : "About Site",
+  "Произошла непредвиденная ошибка": "An unexpected error occurred",
+  "Обновить страницу": "Reload Page"
 }
