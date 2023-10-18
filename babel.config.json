@@ -1,3 +1,11 @@
 {
-  "presets": ["@babel/preset-env", "@babel/preset-typescript"]
+  "presets": ["@babel/preset-env", "@babel/preset-typescript", ["@babel/preset-react", {"runtime": "automatic"}]]
 }
+
+// Это набор предустановок для использования в Babel для компиляции кода с TypeScript и React.
+
+// – @babel/preset-env используется для оптимизации процесса компиляции, ускоряя его и 
+// позволяя использовать современные JavaScript-функции.
+// – @babel/preset-typescript используется для компиляции TypeScript кода в JavaScript.
+// – @babel/preset-react используется для поддержки синтаксиса JSX в React. 
+// Опция "runtime": "automatic" указывает на то, что Babel должен автоматически выбрать версию React для использования.
