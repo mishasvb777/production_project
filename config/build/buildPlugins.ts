@@ -2,10 +2,11 @@ import HTMLWebpackPlugin from 'html-webpack-plugin'
 import webpack, { web } from 'webpack'
 import { type BuildOptions } from './types/config'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 
 // Простая функция которая будет возвращать нам список плагинов
 export function buildPlugins ({ paths, isDev }: BuildOptions): webpack.WebpackPluginInstance[] { // webpack.WebpackPluginInstance[] специальный тип для плагинов у вебпака
-  return [
+  const plugins = [
     new HTMLWebpackPlugin({
       // теперь после сборки у нас в папке сбора проекта, будет появляться файл index.html
       template: paths.html // адрес и имя файла который будет использоваться в качестве шаблона
@@ -19,6 +20,17 @@ export function buildPlugins ({ paths, isDev }: BuildOptions): webpack.WebpackPl
     new webpack.DefinePlugin({
       __IS_DEV__: JSON.stringify(isDev) // не забываем так же проиницаилизировать эту переменную в global.d.ts
     }),
-    new webpack.HotModuleReplacementPlugin()
+    
   ]
+
+  if(isDev){
+    plugins.push(new webpack.HotModuleReplacementPlugin())
+    plugins.push(new BundleAnalyzerPlugin({
+      openAnalyzer: false
+    }))
+  }
+  
+
+  return plugins
+  
 }
