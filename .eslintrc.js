@@ -1,10 +1,11 @@
-export const env = {
+module.exports = {
   browser: true,
   es2021: true,
   jest: false,
   extends: [
     'plugin:react/recommended',
-    'plugin:i18next/recommended'
+    'plugin:i18next/recommended',
+    'plugin:storybook/recommended'
   ],
 
   parserOptions: {
@@ -46,4 +47,4 @@ export const env = {
     __IS_DEV__: true,
   },
 };
-export const extends = ['plugin:storybook/recommended'];
+

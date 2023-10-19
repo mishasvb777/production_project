@@ -5,7 +5,7 @@ import { Theme } from 'app/providers/ThemeProvider';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
 
 const meta = {
-  title: 'pages/ThemeSwitcher',
+  title: 'pages/AboutPage',
   component: AboutPage,
   parameters: {
     layout: 'centered',
