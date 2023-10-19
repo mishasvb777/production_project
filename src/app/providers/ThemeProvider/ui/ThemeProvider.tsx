@@ -11,8 +11,12 @@ import {
 const defaultTheme =
   (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.LIGHT
 
-const ThemeProvider: FC = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(defaultTheme) // состояния для изменения темы
+interface ThemeProviderProps {
+  initialTheme?: Theme;
+}
+
+const ThemeProvider: FC<ThemeProviderProps> = ({ children, initialTheme }) => {
+  const [theme, setTheme] = useState<Theme>(initialTheme || defaultTheme) // состояния для изменения темы
 
   // в провайдер передается объект, тк как это ссылочный тип данных, будет передаваться ссылка, и реакт будет думать что передается каждый раз
   // новый объект, и будет перерисовывать этот компонент, по этому нужно обернуть useMemo
