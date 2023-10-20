@@ -3,6 +3,7 @@ import { Link, type LinkProps } from 'react-router-dom'
 import { classNames } from 'shared/lib/classNames/classNames'
 import cls from './Modal.module.scss'
 import { Portal } from '../Portal/Portal';
+import { useTheme } from 'app/providers/ThemeProvider';
 
 
 interface ModalProps {
@@ -18,7 +19,7 @@ export const Modal: FC<ModalProps> = ({className, children, isOpen, onClose}: Mo
 
   const [isClosing, setIsClosing] = useState(false); // состояние нужно для обработки плавного закрытия модалки
   const timeRef = useRef<ReturnType<typeof setTimeout>>(); // <ReturnType<typeof setTimeout>> c помощью можем получить тип который возвращает та или иная функция
-
+  const {theme} = useTheme() 
   
   const closeHandler = useCallback(() => { // функция для обработки плавного закрытия модалки
     if(onClose){  
@@ -60,7 +61,7 @@ export const Modal: FC<ModalProps> = ({className, children, isOpen, onClose}: Mo
 
   return (
     <Portal>
-      <div className={classNames(cls.Modal, mods, [className])}>
+      <div className={classNames(cls.Modal, mods, [className, theme])}>
         <div className={cls.overlay} onClick={closeHandler}>
           <div className={cls.content} onClick={onContentClick}>
             {children}
@@ -70,3 +71,7 @@ export const Modal: FC<ModalProps> = ({className, children, isOpen, onClose}: Mo
     </Portal>    
   )
 }
+function useStheme(): { theme: any; } {
+  throw new Error('Function not implemented.');
+}
+
