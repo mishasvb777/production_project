@@ -11,13 +11,15 @@ interface ModalProps {
   children?: ReactNode; 
   isOpen?: boolean;
   onClose?: () => void; 
+  lazy?: boolean;
 }
 
 const ANIMATION_DELAY = 300;
 
-export const Modal: FC<ModalProps> = ({className, children, isOpen, onClose}: ModalProps) => {
+export const Modal: FC<ModalProps> = ({className, children, isOpen, onClose, lazy}: ModalProps) => {
 
   const [isClosing, setIsClosing] = useState(false); // состояние нужно для обработки плавного закрытия модалки
+  const [isMounted, setIsMounted] = useState(false); // состояние которое определяет лениво у нас модалка будет подгружаться или нет
   const timeRef = useRef<ReturnType<typeof setTimeout>>(); // <ReturnType<typeof setTimeout>> c помощью можем получить тип который возвращает та или иная функция
   const {theme} = useTheme() 
   
@@ -53,10 +55,25 @@ export const Modal: FC<ModalProps> = ({className, children, isOpen, onClose}: Mo
       window.removeEventListener('keydown', onKeyDown)
     }
   }, [isOpen, onKeyDown])
+
+  // этим useEffect будет управлять монтированием 
+  useEffect(() => {
+    if(isOpen){
+      setIsMounted(true)
+    }
+    return () => setIsMounted(false);
+  }, [isOpen])
   
   const mods: Record<string, boolean> = {
     [cls.opened] : isOpen, 
     [cls.isClosing] : isClosing
+  }
+  // пока у нас lazy true, и состояние isMounted false мы не монтируем модалку в дом, 
+  // если мы передаем в модалку lazy false соответветсено мы говорим что мы сразу хоти монтировать модалку в дом
+  // и при открытии модалки у нас меняется isOPen на тру, и соответственно меняется isMounted на тру, и мы монтируем модалку в дом
+  // 
+  if(lazy && !isMounted) { 
+    return null
   }
 
   return (
