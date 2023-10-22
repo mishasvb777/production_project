@@ -1,12 +1,11 @@
 import { classNames } from 'shared/lib/classNames/classNames'
-import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink'
 import cls from './Navbar.module.scss'
 import { useTranslation } from 'react-i18next'
 import Button, { ThemeButton } from 'shared/ui/Button/Button'
 import { useCallback, useState } from 'react'
-import { Modal } from 'shared/ui/Modal/Modal'
-import LoginForm from 'features/AuthByUsername/ui/LoginForm/LoginForm'
-import { LoginModal } from 'features'
+import { LoginModal } from 'features/AuthByUsername'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserAuthData, userActions } from 'entites/User'
 
 // интерфейс который описывет пропсы которые навбар ожидает на вход
 interface NavbarProps {
@@ -16,7 +15,8 @@ interface NavbarProps {
 const Navbar = ({ className }: NavbarProps) => {
   const { t } = useTranslation()
   const [isAuthModal, setIsAuthModal] = useState(false) // состояние с помощью которого будем управлять видимость модального окна
-
+  const authData = useSelector(getUserAuthData)
+  const dispatch = useDispatch()
   // ДЛЯ ВСЕХ ФУНКЦИЯ КОТОРЫЕ МЫ БУДЕМ ПЕРЕДАВАТЬ КУДА ТО КАК ПРОПС МЫ БУДЕМ ИСПОЛЬЗОВАТЬ useCallback ЧТОБЫ НЕ МЕНЯЛАСЬ ССЫЛКА
   const onCloseModal = useCallback(() => {
     setIsAuthModal(false)
@@ -25,6 +25,20 @@ const Navbar = ({ className }: NavbarProps) => {
   const onShowModal = useCallback(() => {
     setIsAuthModal(true)
   }, [setIsAuthModal]) 
+
+  const onLogout = useCallback(() => {
+    dispatch(userActions.logout())
+  }, [dispatch]) 
+
+  if(authData) {
+    return(
+      <div className={classNames(cls.Navbar, {}, [className])}>
+        <Button theme={ThemeButton.CLEAR_INVERTED} className={cls.links} onClick={onLogout}>
+          {t('Выйти')}
+        </Button>         
+      </div>
+    )    
+  }
 
   return (
     <div className={classNames(cls.Navbar, {}, [className])}>

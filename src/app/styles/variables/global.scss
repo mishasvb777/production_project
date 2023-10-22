@@ -9,7 +9,7 @@
   --font-size-xl: 32px;
   --font-line-xl: 40px;
   --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
-  --error-color: rgb(219, 7, 7);
+ 
 
   // Размеры
   --navbar-height: 50px;
@@ -21,5 +21,7 @@
 
   //Цвета
   --overlay-color: rgba(0, 0, 0, 0.6);
+  --red-light: #ff0000;
+  --red-dark: #851616;
 }
 

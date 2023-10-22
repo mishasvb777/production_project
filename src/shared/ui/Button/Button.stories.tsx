@@ -110,5 +110,13 @@ export const SquareSizeXL: Story = {
   },
 };
 
+export const Disabled: Story = {
+  args: {
+    children: 'Войти',
+    theme: ThemeButton.OUTLINE,    
+    disabled: true
+  },
+};
+
 
 
