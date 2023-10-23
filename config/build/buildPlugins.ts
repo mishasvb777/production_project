@@ -21,18 +21,14 @@ export function buildPlugins ({ paths, isDev }: BuildOptions): webpack.WebpackPl
       __IS_DEV__: JSON.stringify(isDev) // не забываем так же проиницаилизировать эту переменную в global.d.ts
     }),
     
-  ]
-
-  plugins.push(new BundleAnalyzerPlugin({
-    openAnalyzer: false
-  }))
+  ]  
 
   if(isDev){
-    plugins.push(new webpack.HotModuleReplacementPlugin())
-    
-  }
-  
+    plugins.push(new BundleAnalyzerPlugin({
+      openAnalyzer: false
+    }))
+    plugins.push(new webpack.HotModuleReplacementPlugin())    
+  }  
 
-  return plugins
-  
+  return plugins  
 }
