@@ -10,10 +10,6 @@ interface LoginUsernameProps{
   password: string
 }
 
-enum LoginErrors {
-  
-}
-
 export const loginByUsername = createAsyncThunk<User, LoginUsernameProps, { rejectValue: string }>( // User - это то что функция должна вернуть, а LoginUsernameProps это то что будет приниматься в качестве аргуементов
   'login/loginByUsername',
   async (authData, thunkAPI) => {
