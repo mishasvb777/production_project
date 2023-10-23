@@ -1,17 +1,18 @@
 // описания схемы для ОБЩЕГО стора
-
 import { AnyAction, CombinedState, EnhancedStore, Reducer, ReducersMapObject } from "@reduxjs/toolkit";
 import  { CounterSchema }  from "entites/Counter/indext";
+import { ProfileSchema } from "entites/Profile";
 import { UserSchema } from "entites/User";
 import { LoginSchema } from "features/AuthByUsername";
 
 
 export interface StateSchema {
   counter: CounterSchema;
-  user: UserSchema;
+  user: UserSchema; 
 
   //Асинхронные редьюсеры
   loginForm?: LoginSchema;
+  profile?: ProfileSchema
 }
 
 export type StateSchemKey = keyof StateSchema

@@ -2,7 +2,7 @@
 import { AsyncThunkAction } from "@reduxjs/toolkit";
 import { StateSchema } from "app/providers/StoreProvider";
 
-type ActionCreatorType<Return, Arg, RejectedValue> = (arg: Arg) => AsyncThunkAction<ReturnToType, Arg, {rejectValue: RejectedValue}> // - это тип который предстваляет из себя функцию, которая принимает какой то аргумент и возвращает thunk func action
+type ActionCreatorType<ReturnToType, Arg, RejectedValue> = (arg: Arg) => AsyncThunkAction<ReturnToType, Arg, {rejectValue: RejectedValue}> // - это тип который предстваляет из себя функцию, которая принимает какой то аргумент и возвращает thunk func action
 
 export class TestAsyncThunk<Return, Arg, RejectedValue> { // Return - это тип который возвращает thunk, Arg - это аргумент, RejectedValue - то что возвращает thunk в случае ошибки
   dispatch: jest.MockedFn<any>;

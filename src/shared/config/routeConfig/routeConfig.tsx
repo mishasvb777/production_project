@@ -1,6 +1,7 @@
 import AboutPage from 'pages/AboutPage/ui/AboutPage'
 import { MainPage } from 'pages/MainPage'
 import { NotFoundPage } from 'pages/NotFoundPage'
+import { ProfilePage } from 'pages/ProfilePage'
 import { type RouteProps } from 'react-router-dom'
 
 // Сделаем перечеслинение внутри которого мы объявим список route
@@ -8,6 +9,8 @@ import { type RouteProps } from 'react-router-dom'
 export enum AppRoutes {
   MAIN = 'main',
   ABOUT = 'about', 
+  PROFILE = 'profile',
+  //last
   NOT_FOUND = 'not_found'
 }
 
@@ -15,11 +18,12 @@ export enum AppRoutes {
 export const RoutePatch: Record<AppRoutes, string> = {
   [AppRoutes.MAIN]: '/',
   [AppRoutes.ABOUT]: '/about',
+  [AppRoutes.PROFILE]: '/profile',
+  //last
   [AppRoutes.NOT_FOUND]: '*'
 }
 
 // Сами роуты, маршрут для них, компонент который должны отрисовыватьcя
-
 export const routeConfig: Record<AppRoutes, RouteProps> = {
   [AppRoutes.MAIN]: {
     path: RoutePatch.main,
@@ -29,6 +33,11 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     path: RoutePatch.about,
     element: <AboutPage />
   }, 
+  [AppRoutes.PROFILE]: {
+    path: RoutePatch.profile,
+    element: <ProfilePage />
+  }, 
+  //last
   [AppRoutes.NOT_FOUND]: {
     path: RoutePatch.not_found,
     element: <NotFoundPage />

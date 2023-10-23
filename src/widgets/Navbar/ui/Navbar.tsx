@@ -2,7 +2,7 @@ import { classNames } from 'shared/lib/classNames/classNames'
 import cls from './Navbar.module.scss'
 import { useTranslation } from 'react-i18next'
 import Button, { ThemeButton } from 'shared/ui/Button/Button'
-import { useCallback, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { LoginModal } from 'features/AuthByUsername'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserAuthData, userActions } from 'entites/User'
@@ -12,7 +12,7 @@ interface NavbarProps {
   className?: string
 }
 
-const Navbar = ({ className }: NavbarProps) => {
+const Navbar = memo(({ className }: NavbarProps) => {
   const { t } = useTranslation()
   const [isAuthModal, setIsAuthModal] = useState(false) // состояние с помощью которого будем управлять видимость модального окна
   const authData = useSelector(getUserAuthData)
@@ -33,6 +33,7 @@ const Navbar = ({ className }: NavbarProps) => {
   if(authData) {
     return(
       <div className={classNames(cls.Navbar, {}, [className])}>
+        <p>Привет: {authData.username} </p>
         <Button theme={ThemeButton.CLEAR_INVERTED} className={cls.links} onClick={onLogout}>
           {t('Выйти')}
         </Button>         
@@ -50,6 +51,6 @@ const Navbar = ({ className }: NavbarProps) => {
       )}           
     </div>
   )
-}
+})
 
 export default Navbar
