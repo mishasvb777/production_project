@@ -1,14 +1,15 @@
 // по хорошему конфигурации держать рядом для чего это конфигурация пишется 
-import { ReducersMapObject, configureStore, createReducer } from "@reduxjs/toolkit";
+import { DeepPartial, ReducersMapObject, configureStore, createReducer } from "@reduxjs/toolkit";
 import { StateSchema } from "./StateSchema";
 import { counterReducer } from "entites/Counter/indext";
 import { userReducer } from "entites/User";
 import { createReducerManager } from "./reducerManager";
 
-export function createReduxStore(initialState?: StateSchema) { // вынесим создание стора в отдельную функцию для того что мы могли переиспользовать ее, и например для storybook или для jest этот стор отдельно создавать
+export function createReduxStore(initialState?: StateSchema, asyncReducers?: ReducersMapObject<StateSchema>) { // вынесим создание стора в отдельную функцию для того что мы могли переиспользовать ее, и например для storybook или для jest этот стор отдельно создавать
   const rootReducers: ReducersMapObject<StateSchema> = {// для корневого редьюсера (который объединяет все наши редьюсеры) создаем общий объект, так же в корневом редьюсере мы оставляем только обязательные редьюсеры которые должны сразу подгружаться, асинхронные редьюсеры не добавляем 
+    ...asyncReducers,
     counter: counterReducer, 
-    user: userReducer    
+    user: userReducer   
   }
 
   const reducerManager = createReducerManager(rootReducers)
