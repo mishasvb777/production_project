@@ -19,7 +19,7 @@ export const loginSlice = createSlice({
         state.password = action.payload
       }  
     },   
-    extraReducers: (builder) => {
+    extraReducers: (builder) => { // редьюсеры для выполнения асинхронных операций
       builder
         .addCase(loginByUsername.pending, (state, action) => { // состояние когда начал выполняться асинк экшен
           state.error = undefined;

@@ -1,5 +1,6 @@
 // описания схемы для ОБЩЕГО стора
 
+import { AnyAction, CombinedState, EnhancedStore, Reducer, ReducersMapObject } from "@reduxjs/toolkit";
 import  { CounterSchema }  from "entites/Counter/indext";
 import { UserSchema } from "entites/User";
 import { LoginSchema } from "features/AuthByUsername";
@@ -8,5 +9,20 @@ import { LoginSchema } from "features/AuthByUsername";
 export interface StateSchema {
   counter: CounterSchema;
   user: UserSchema;
-  loginForm: LoginSchema;
+
+  //Асинхронные редьюсеры
+  loginForm?: LoginSchema;
+}
+
+export type StateSchemKey = keyof StateSchema
+
+export interface ReduxStoreWithManager extends EnhancedStore<StateSchema> { // EnhancedStore стандартный тип который нам возвращается при создании стора
+  reducerManager: ReducerManager
+}
+
+export interface ReducerManager {
+  getReducerMap: () => ReducersMapObject<StateSchema>, 
+  reduce: (state: StateSchema, action: AnyAction) => CombinedState<StateSchema>,
+  add: (key: StateSchemKey, reducer: Reducer) => void,
+  remove: (key: StateSchemKey) => void
 }

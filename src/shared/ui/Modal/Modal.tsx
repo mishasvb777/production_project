@@ -60,8 +60,7 @@ export const Modal: FC<ModalProps> = ({className, children, isOpen, onClose, laz
   useEffect(() => {
     if(isOpen){
       setIsMounted(true)
-    }
-    return () => setIsMounted(false);
+    }    
   }, [isOpen])
   
   const mods: Record<string, boolean> = {
