@@ -4,7 +4,8 @@ import { ReactNode, Reducer } from 'react';
 import { Provider } from 'react-redux';
 import { createReduxStore } from '../config/store';
 import { StateSchema } from '../config/StateSchema';
-import { DeepPartial, ReducersMapObject } from '@reduxjs/toolkit';
+import { ReducersMapObject } from '@reduxjs/toolkit';
+import { useNavigate } from 'react-router-dom';
 
 interface StoreProviderProps {
   children?: ReactNode,
@@ -14,7 +15,9 @@ interface StoreProviderProps {
 
 const StoreProvider = ({children, initialState, asyncReducers} : StoreProviderProps) => {
 
-  const store = createReduxStore(initialState as StateSchema, asyncReducers as ReducersMapObject<StateSchema>)
+  const navigate = useNavigate() // функиця необходима для того что бы программно можно было управлять роутингом, например полсе успешного входа переходить на страницу пользователя 
+
+  const store = createReduxStore(initialState as StateSchema, asyncReducers as ReducersMapObject<StateSchema>, navigate) // здесь мы создаем сам стор ОСНОВНОЙ для всего приложения
 
   return (
     <Provider store={store}>

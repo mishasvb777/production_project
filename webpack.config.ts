@@ -21,12 +21,14 @@ export default (env: BuildEnv) => { // возвращаем функцию дл�
   const mode = env.mode || 'development' // теперь у нас мод зависит от того каким скриптом мы запускаем build, "build:prod" или "build:dev"
   const isDev = mode === 'development'
   const PORT = env.port || 3000 // env.port - это переменная окружения которые мы прописываем в скриптах запуска в файле package.json (--env port=3000)
+  const apiUrl =env.apiUrl || 'http://localhost:8000'
 
   const config: webpack.Configuration = buildWebpackConfig({
     mode,
     paths,
     isDev,
-    port: PORT
+    port: PORT,
+    apiUrl
   })
 
   return config

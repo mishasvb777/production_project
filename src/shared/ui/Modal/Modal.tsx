@@ -1,6 +1,6 @@
-import React, { ReactNode, type FC, useState, useRef, useEffect, useCallback } from 'react'
+import React, { ReactNode, type FC, useState, useRef, useEffect, useCallback, MutableRefObject } from 'react'
 import { Link, type LinkProps } from 'react-router-dom'
-import { classNames } from 'shared/lib/classNames/classNames'
+import { Mods, classNames } from 'shared/lib/classNames/classNames'
 import cls from './Modal.module.scss'
 import { Portal } from '../Portal/Portal';
 import { useTheme } from 'app/providers/ThemeProvider';
@@ -20,7 +20,7 @@ export const Modal: FC<ModalProps> = ({className, children, isOpen, onClose, laz
 
   const [isClosing, setIsClosing] = useState(false); // состояние нужно для обработки плавного закрытия модалки
   const [isMounted, setIsMounted] = useState(false); // состояние которое определяет лениво у нас модалка будет подгружаться или нет
-  const timeRef = useRef<ReturnType<typeof setTimeout>>(); // <ReturnType<typeof setTimeout>> c помощью можем получить тип который возвращает та или иная функция
+  const timeRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>; // <ReturnType<typeof setTimeout>> c помощью можем получить тип который возвращает та или иная функция
   const {theme} = useTheme() 
   
   const closeHandler = useCallback(() => { // функция для обработки плавного закрытия модалки
@@ -63,7 +63,7 @@ export const Modal: FC<ModalProps> = ({className, children, isOpen, onClose, laz
     }    
   }, [isOpen])
   
-  const mods: Record<string, boolean> = {
+  const mods: Mods = {
     [cls.opened] : isOpen, 
     [cls.isClosing] : isClosing
   }

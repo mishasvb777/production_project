@@ -1,6 +1,5 @@
 import { StateSchema } from "app/providers/StoreProvider"
 import { getCounter } from "./getCounter"
-import { DeepPartial } from "@reduxjs/toolkit"
 
 describe('getCounter', () => {
   // У нас стейт может быть очень большим, и нам нужно проверить что наш sekctor возвращает именно то что нам нужно

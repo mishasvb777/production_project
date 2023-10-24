@@ -9,14 +9,14 @@ import { StoreProvider } from 'app/providers/StoreProvider'
 
 // Оборачиваем все прилоджения в BrowserRouter для того что бы роутинг работал
 render(
-  <StoreProvider>
-    <BrowserRouter>
+  <BrowserRouter>
+    <StoreProvider>
       <ErrorBoundary>
         <ThemeProvider>
           <App />
         </ThemeProvider>
-      </ErrorBoundary>
-    </BrowserRouter>
-  </StoreProvider>, 
+      </ErrorBoundary>    
+    </StoreProvider>
+  </BrowserRouter>,
   document.getElementById('root')
 )

@@ -1,5 +1,12 @@
 import { Country, Currency } from "shared/const/commons";
 
+export interface ProfileSchema { // как профиль у нас будет храниться в стейте
+  data?: Profile;
+  isLoading: boolean;
+  error?: string;
+  readonly: boolean; // состояние которое будет определять доступен ли пользователь для редактирования 
+}
+
 export interface Profile { 
   first: string,
   lastname: string,
@@ -11,9 +18,3 @@ export interface Profile {
   avatar: string
 }
 
-export interface ProfileSchema { // как профиль у нас будет храниться в стейте
-  data?: Profile;
-  isLoading: boolean;
-  error?: string;
-  readonly: boolean; // состояние которое будет определять доступен ли пользователь для редактирования 
-}

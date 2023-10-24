@@ -1,9 +1,11 @@
 // описания схемы для ОБЩЕГО стора
 import { AnyAction, CombinedState, EnhancedStore, Reducer, ReducersMapObject } from "@reduxjs/toolkit";
+import { Axios, AxiosInstance } from "axios";
 import  { CounterSchema }  from "entites/Counter/indext";
 import { ProfileSchema } from "entites/Profile";
 import { UserSchema } from "entites/User";
 import { LoginSchema } from "features/AuthByUsername";
+import { NavigateOptions, To } from "react-router-dom";
 
 
 export interface StateSchema {
@@ -26,4 +28,14 @@ export interface ReducerManager {
   reduce: (state: StateSchema, action: AnyAction) => CombinedState<StateSchema>,
   add: (key: StateSchemKey, reducer: Reducer) => void,
   remove: (key: StateSchemKey) => void
+}
+
+export interface ThunkExtraArg { // тип для описания экстра аргументов которые передаем через мидлвары axios
+  api: AxiosInstance;
+  navigate?: (to: To, options?: NavigateOptions) => void;
+}
+
+export interface ThunkConfig<T> { // этот тип для описания thunk 
+  rejectValue: T;
+  extra: ThunkExtraArg
 }

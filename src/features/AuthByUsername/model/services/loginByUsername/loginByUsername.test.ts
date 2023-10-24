@@ -1,7 +1,5 @@
 import axios from 'axios';
 import { loginByUsername } from './loginByUsername';
-import { StateSchema } from 'app/providers/StoreProvider';
-import { Dispatch } from '@reduxjs/toolkit';
 import { userActions } from 'entites/User';
 import { TestAsyncThunk } from 'shared/lib/tests/testAsyncThunk/TestAsyncThunk';
 
@@ -47,9 +45,9 @@ describe('LoginByUsername', () => {
 
   test('succes login', async () => {
     const userValue = {username: 'name', id: '1'}
-    mockedAxios.post.mockReturnValue(Promise.resolve({ data:userValue }));
 
     const thunk = new TestAsyncThunk(loginByUsername)
+    thunk.api?.post.mockReturnValue(Promise.resolve({data: userValue})) 
     const result = await thunk.callThunk({username: '123', password: '123'})  // result нам вернет объект в котором будет  type, username, id, и тд    
 
     
@@ -60,14 +58,14 @@ describe('LoginByUsername', () => {
     expect(result.payload).toEqual(userValue)
   })
 
-  test('error login', async () => {
-    mockedAxios.post.mockReturnValue(Promise.resolve({ status: 403 })); // здесь проверям когда запрос выполнился с ошибкой, диспатч у нас отработать не должен
+  test('error login', async () => {    
 
     const thunk = new TestAsyncThunk(loginByUsername)
+    thunk.api?.post.mockReturnValue(Promise.resolve({ status: 403 })); // здесь проверям когда запрос выполнился с ошибкой, диспатч у нас отработать не должен
     const result = await thunk.callThunk({username: '123', password: '123'})    // result нам вернет объект в котором будет  type, username, id, и тд
    
     expect(thunk.dispatch).toHaveBeenCalledTimes(2) // проверяем что диспатч у нас вызвался 2 раза
-    expect(mockedAxios.post).toHaveBeenCalled(); // проверяем что метод POST был отправлен 
+    expect(thunk.api?.post).toHaveBeenCalled(); // проверяем что метод POST был отправлен 
     expect(result.meta.requestStatus).toBe('rejected'); // при ошибки в запросе статус у нас будет rejected
     expect(result.payload).toEqual('error')
   })

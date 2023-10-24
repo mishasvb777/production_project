@@ -15,6 +15,7 @@ export interface BuildPaths {
 export interface BuildEnv { // интерфейс для переменных окружения, которые мы используем когда вызываем функцию которая возвращает config в файле webpack.config.ts
   mode: BuildMode
   port: number
+  apiUrl: string
 }
 
 export interface BuildOptions {
@@ -22,4 +23,5 @@ export interface BuildOptions {
   paths: BuildPaths // ПУТИ, путь до энтри поинта, путь до сборки проекта, любые пути которые будут использоваться
   isDev: boolean // isDev будет ровняться true если mode у нас продакшен
   port: number
+  apiUrl: string
 }

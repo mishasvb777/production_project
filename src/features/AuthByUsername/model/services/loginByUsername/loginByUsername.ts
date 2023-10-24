@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import axios from "axios"
+import { ThunkConfig, ThunkExtraArg } from "app/providers/StoreProvider/config/StateSchema"
 import { User, userActions } from "entites/User"
-import { t } from "i18next"
 
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage"
 
@@ -10,24 +9,28 @@ interface LoginUsernameProps{
   password: string
 }
 
-export const loginByUsername = createAsyncThunk<User, LoginUsernameProps, { rejectValue: string }>( // User - это то что функция должна вернуть, а LoginUsernameProps это то что будет приниматься в качестве аргуементов
+export const loginByUsername = createAsyncThunk<User, LoginUsernameProps, ThunkConfig<string>>( // User - это то что функция должна вернуть, а LoginUsernameProps это то что будет приниматься в качестве аргуементов, ThunkConfig<string> - описание конфига для thunk 
   'login/loginByUsername',
-  async (authData, thunkAPI) => {
-    try{
-      const response = await axios.post<User>('http://localhost:8000/login', authData)
+  async (authData, {dispatch, extra, rejectWithValue}) => { // thunkAPI - деструктуризируем и достаем от туда dispatch и extra и rejectWithValue
+    try{      
+      const response = await extra.api.post<User>('/login', authData) // extra.api - это экстра аргумент
 
       if(!response.data){
         throw new Error()
       }
 
       localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(response.data))
-      thunkAPI.dispatch(userActions.setAuthData(response.data))
-
+      dispatch(userActions.setAuthData(response.data))
+      
+      if(extra.navigate){
+        extra.navigate('/about') // получается при вызове этой функции мы говорим что после успешного выполения запроса перевели на страницу about
+      }
+      
       return response.data
     }
     catch(e) {
       console.log(e)
-      return thunkAPI.rejectWithValue('error') 
+      return rejectWithValue('error') 
     }     
   }
 )
