@@ -1,11 +1,14 @@
 import AboutPage from 'pages/AboutPage/ui/AboutPage'
+import { ArticalPageDetails } from 'pages/ArticleDetailsPage'
+import { ArticalPage } from 'pages/ArticlesPage'
+
 import { MainPage } from 'pages/MainPage'
 import { NotFoundPage } from 'pages/NotFoundPage'
 import { ProfilePage } from 'pages/ProfilePage'
 import { type RouteProps } from 'react-router-dom'
 
 //Безопасные роуты
-type AppRoutesProps = RouteProps & {
+export type AppRoutesProps = RouteProps & {
   authOnly?: boolean;
 }
 
@@ -15,6 +18,8 @@ export enum AppRoutes {
   MAIN = 'main',
   ABOUT = 'about', 
   PROFILE = 'profile',
+  ARTICLES = 'articles',
+  ARTICLES_DETAILS = 'articles_details',
   //last
   NOT_FOUND = 'not_found'
 }
@@ -24,6 +29,8 @@ export const RoutePatch: Record<AppRoutes, string> = {
   [AppRoutes.MAIN]: '/',
   [AppRoutes.ABOUT]: '/about',
   [AppRoutes.PROFILE]: '/profile',
+  [AppRoutes.ARTICLES]: '/articles',
+  [AppRoutes.ARTICLES_DETAILS]: '/articles/', // + :id
   //last
   [AppRoutes.NOT_FOUND]: '*'
 }
@@ -41,6 +48,16 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.PROFILE]: {
     path: RoutePatch.profile,
     element: <ProfilePage />,
+    authOnly: true
+  }, 
+  [AppRoutes.ARTICLES]: {
+    path: RoutePatch.articles,
+    element: <ArticalPage />,
+    authOnly: true
+  }, 
+  [AppRoutes.ARTICLES_DETAILS]: {
+    path: `${RoutePatch.articles_details}:id` ,
+    element: <ArticalPageDetails />,
     authOnly: true
   }, 
   //last
