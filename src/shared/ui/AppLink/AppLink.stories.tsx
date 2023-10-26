@@ -13,7 +13,7 @@ const meta = {
   argTypes: {    
   },
   args: {
-    to: '#'
+    to: '/'
   }
 } satisfies Meta<typeof AppLink>;
 

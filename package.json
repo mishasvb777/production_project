@@ -18,7 +18,7 @@
   "overrides": {
     "loki": {
       "@storybook/react": "$@storybook/react"
-    }
+    } 
   },
   "keywords": [],
   "author": "",

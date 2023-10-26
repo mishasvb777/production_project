@@ -37,5 +37,6 @@ export interface ThunkExtraArg { // тип для описания экстра 
 
 export interface ThunkConfig<T> { // этот тип для описания thunk 
   rejectValue: T;
-  extra: ThunkExtraArg
+  extra: ThunkExtraArg;
+  state: StateSchema;
 }

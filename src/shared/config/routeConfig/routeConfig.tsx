@@ -4,6 +4,11 @@ import { NotFoundPage } from 'pages/NotFoundPage'
 import { ProfilePage } from 'pages/ProfilePage'
 import { type RouteProps } from 'react-router-dom'
 
+//Безопасные роуты
+type AppRoutesProps = RouteProps & {
+  authOnly?: boolean;
+}
+
 // Сделаем перечеслинение внутри которого мы объявим список route
 // это необходимо если мы захотим хранить информацию о маршрутах в стетйте редакса
 export enum AppRoutes {
@@ -24,7 +29,7 @@ export const RoutePatch: Record<AppRoutes, string> = {
 }
 
 // Сами роуты, маршрут для них, компонент который должны отрисовыватьcя
-export const routeConfig: Record<AppRoutes, RouteProps> = {
+export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
     path: RoutePatch.main,
     element: <MainPage />
@@ -35,7 +40,8 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
   }, 
   [AppRoutes.PROFILE]: {
     path: RoutePatch.profile,
-    element: <ProfilePage />
+    element: <ProfilePage />,
+    authOnly: true
   }, 
   //last
   [AppRoutes.NOT_FOUND]: {

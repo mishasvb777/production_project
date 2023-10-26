@@ -27,7 +27,7 @@ const Sidebar = memo(({ className }: SideBarProps) => {
       <SidebarItem 
         item={item}
         collapsed={collapsed}
-        key={item.path}
+        key={item.path}       
       />     
     ))
   }, [collapsed])
