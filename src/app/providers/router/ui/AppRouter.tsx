@@ -11,7 +11,7 @@ const AppRouter = () => {
 
   const routes = useMemo(() => {
     return Object.values(routeConfig).filter(route => {
-      if(route.authOnly && !isAuth){
+      if(route.authOnly && !isAuth){ 
         return false
       }
       return true
