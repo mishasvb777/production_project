@@ -9,6 +9,11 @@ export const fetchProfileData = createAsyncThunk<Profile, void, ThunkConfig<stri
   async (_, {extra, rejectWithValue}) => { // thunkAPI - деструктуризируем и достаем от туда dispatch и extra и rejectWithValue
     try{      
       const response = await extra.api.get<Profile>('/profile') // extra.api - это экстра аргумент
+
+      if(!response.data){
+        throw new Error()
+      }
+
       return response.data
     }
     catch(e) {

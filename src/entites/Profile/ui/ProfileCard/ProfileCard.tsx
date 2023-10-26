@@ -11,6 +11,7 @@ import { Country } from 'entites/Country';
 import { CurrencySelect } from 'entites/Currency/ui/CurrencySelect/CurrencySelect';
 import { CountrySelect } from 'entites/Country/ui/CountrySelect/CountrySelect';
 
+
 interface ProfileCardProps {
   className? : string
   data?: Profile
@@ -81,7 +82,7 @@ const ProfileCard = (
         }
         <Input value={data?.first} placeholder={t('Ваше имя')} className={cls.input} onChange={onChangeFirstname} readonly={readonly}/>
         <Input value={data?.lastname} placeholder={t('Ваша фамилия')} className={cls.input} onChange={onChangeLastname} readonly={readonly}/>
-        <Input value={data?.age} placeholder={t('Ваш возраст')} className={cls.input} onChange={onChangeAge} readonly={readonly}/>
+        <Input value={data?.age} type={'number'} placeholder={t('Ваш возраст')} className={cls.input} onChange={onChangeAge} readonly={readonly}/>
         <Input value={data?.city} placeholder={t('Город')} className={cls.input} onChange={onChangeCity} readonly={readonly}/>
         <Input value={data?.username} placeholder={t('Имя пользователя')} className={cls.input} onChange={onChangeUsername} readonly={readonly}/>
         <Input value={data?.avatar} placeholder={t('Введите ссылку на аватар')} className={cls.input} onChange={onChangeAvatar} readonly={readonly}/>

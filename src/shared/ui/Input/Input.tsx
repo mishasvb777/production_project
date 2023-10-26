@@ -22,8 +22,8 @@ const Input = memo(({
     onChange, 
     type = 'text', 
     placeholder, 
-    autofocus, 
-    readonly,
+    autofocus,      
+    readonly,     
     ...othetProps
   } : InputProps) => {
 
@@ -68,7 +68,7 @@ const Input = memo(({
         {`${placeholder}>`}
       </div>}
       <div className={cls.caretWrapper}>
-        <input 
+        <input           
           ref={ref}
           className={cls.input} 
           type={type} 

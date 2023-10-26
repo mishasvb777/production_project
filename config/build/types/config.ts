@@ -24,4 +24,5 @@ export interface BuildOptions {
   isDev: boolean // isDev будет ровняться true если mode у нас продакшен
   port: number
   apiUrl: string
+  project: 'storybook' | 'frontend' | 'jest' // переменные для определения в какой среде у нас выполняется код
 }

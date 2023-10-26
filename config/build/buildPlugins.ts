@@ -5,7 +5,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 
 // Простая функция которая будет возвращать нам список плагинов
-export function buildPlugins ({ paths, isDev, apiUrl }: BuildOptions): webpack.WebpackPluginInstance[] { // webpack.WebpackPluginInstance[] специальный тип для плагинов у вебпака
+export function buildPlugins ({ paths, isDev, apiUrl, project }: BuildOptions): webpack.WebpackPluginInstance[] { // webpack.WebpackPluginInstance[] специальный тип для плагинов у вебпака
   const plugins = [
     new HTMLWebpackPlugin({
       // теперь после сборки у нас в папке сбора проекта, будет появляться файл index.html
@@ -19,7 +19,8 @@ export function buildPlugins ({ paths, isDev, apiUrl }: BuildOptions): webpack.W
     // c помощью него можно прокидывать глобальные переменнные
     new webpack.DefinePlugin({
       __IS_DEV__: JSON.stringify(isDev), // не забываем так же проиницаилизировать эту переменную в global.d.ts
-      __API__: JSON.stringify(apiUrl) // не забываем так же проиницаилизировать эту переменную в global.d.ts
+      __API__: JSON.stringify(apiUrl), // не забываем так же проиницаилизировать эту переменную в global.d.ts
+      __PROJECT__: JSON.stringify(project)
     }),
     
   ]  
