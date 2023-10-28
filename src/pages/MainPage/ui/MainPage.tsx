@@ -3,6 +3,7 @@ import { Counter } from 'entites/Counter/indext'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Input from 'shared/ui/Input/Input'
+import { Skeleton } from 'shared/ui/Skeleton/Skeleton'
 
 const MainPage = () => {
   const { t } = useTranslation('main')
@@ -14,9 +15,7 @@ const MainPage = () => {
   console.log('render')
   return (
     <div>
-      <BugButton /> 
-      <p>{value}</p>    
-      <Input value={value} onChange={onChange} placeholder={'Введите текст'}/>
+      Main Page 
     </div>
   )
 }

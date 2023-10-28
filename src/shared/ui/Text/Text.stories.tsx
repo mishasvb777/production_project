@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import  Text, { TextTheme }  from './Text';
+import  Text, { TextSize, TextTheme }  from './Text';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from 'app/providers/ThemeProvider';
 
@@ -65,5 +65,13 @@ export const errorText: Story = {
     title: 'Title',
     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse vitae soluta eius ipsum aspernatur magni? Veritatis dolore, dolorum expedita sit eum, ipsa dignissimos sequi sed esse, dolorem delectus qui ratione?',
     theme: TextTheme.ERROR
+  },
+};
+
+export const SizeL: Story = {
+  args: {    
+    title: 'Title',
+    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse vitae soluta eius ipsum aspernatur magni? Veritatis dolore, dolorum expedita sit eum, ipsa dignissimos sequi sed esse, dolorem delectus qui ratione?',
+    size: TextSize.L
   },
 };

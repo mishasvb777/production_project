@@ -1,6 +1,7 @@
 // описания схемы для ОБЩЕГО стора
 import { AnyAction, CombinedState, EnhancedStore, Reducer, ReducersMapObject } from "@reduxjs/toolkit";
 import { Axios, AxiosInstance } from "axios";
+import { ArticleDetailsSchema } from "entites/Article";
 import  { CounterSchema }  from "entites/Counter/indext";
 import { ProfileSchema } from "entites/Profile";
 import { UserSchema } from "entites/User";
@@ -15,6 +16,7 @@ export interface StateSchema {
   //Асинхронные редьюсеры
   loginForm?: LoginSchema;
   profile?: ProfileSchema
+  articleDetails?: ArticleDetailsSchema
 }
 
 export type StateSchemKey = keyof StateSchema
