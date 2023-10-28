@@ -1,3 +1,6 @@
 Test file
-___
-1. commit 1 for feature 2
+
+1. commit 1
+2. commit 2
+3. coomit 3
+
