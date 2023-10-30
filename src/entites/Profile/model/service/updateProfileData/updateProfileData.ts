@@ -21,7 +21,7 @@ export const updateProfileData = createAsyncThunk<Profile, void, ThunkConfig<Val
     } 
 
     try{      
-      const response = await extra.api.put<Profile>('/profile', formData) // extra.api - это экстра аргумент
+      const response = await extra.api.put<Profile>(`/profile/${formData?.id}`, formData) // extra.api - это экстра аргумент, первый аргумент куда, вторым аргументом что передаем!!!
 
       if(!response.data){
         throw new Error()

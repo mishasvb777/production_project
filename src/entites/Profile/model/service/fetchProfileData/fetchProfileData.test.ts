@@ -25,7 +25,7 @@ describe('fetchProfileData.test', () => {
     const thunk = new TestAsyncThunk(fetchProfileData)
     thunk.api?.get.mockReturnValue(Promise.resolve({ data })) 
 
-    const result = await thunk.callThunk()  
+    const result = await thunk.callThunk('1')  
     
     expect(mockedAxios.get).toHaveBeenCalled(); // проверяем что метод POST был отправлен 
     expect(result.meta.requestStatus).toBe('fulfilled'); // проверяем что наш запрос успешно выполнился 
@@ -36,7 +36,7 @@ describe('fetchProfileData.test', () => {
 
     const thunk = new TestAsyncThunk(fetchProfileData)
     thunk.api?.get.mockReturnValue(Promise.resolve({ status: 403 })); // здесь проверям когда запрос выполнился с ошибкой, диспатч у нас отработать не должен
-    const result = await thunk.callThunk()   
+    const result = await thunk.callThunk('1')   
 
     expect(mockedAxios.get).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('rejected');

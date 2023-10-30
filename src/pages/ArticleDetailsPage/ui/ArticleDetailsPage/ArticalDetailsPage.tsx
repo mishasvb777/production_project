@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ArticalDetailsPage.module.scss'
@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getArticleCommentsIsLoading } from '../../model/selectors/comments';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInititalEffect';
 import { fetchCommentsByArticleId } from 'pages/ArticleDetailsPage/model/services/fetchCommetsByArticleId/fetchCommetsByArticleId';
+import { AddCommentForm } from 'features/AddCommentForm';
+import { addCommentForArticle } from 'pages/ArticleDetailsPage/model/services/addCommentForArticle/addCommentForArticle';
 
 interface ArticalDetailsPageProps {
   className?: string
@@ -30,6 +32,11 @@ const ArticalDetailsPage = ({className}: ArticalDetailsPageProps) => {
   
   const dispatch = useDispatch()
 
+  const onSendComment = useCallback((text: string) => {
+    dispatch(addCommentForArticle(text))
+    // dispatch(fetchCommentsByArticleId(id)) вариант автоматического обновления комментов при добавлении
+  }, [dispatch])
+
   useInitialEffect( () => {
     dispatch(fetchCommentsByArticleId(id))
   })
@@ -45,9 +52,10 @@ const ArticalDetailsPage = ({className}: ArticalDetailsPageProps) => {
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
       <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
-        <ArticleDetails id={id}/>
+        <ArticleDetails id={id}/>        
         <Text className={cls.commentTitle} title={t('Комментарий')} />
-        <CommentList isLoading={commentsIsLoading} comments={comments}/>
+        <AddCommentForm onSendComment={onSendComment}/>
+        <CommentList isLoading={commentsIsLoading} comments={comments} />
       </div>
     </DynamicModuleLoader>
     

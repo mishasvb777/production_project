@@ -21,6 +21,8 @@ import { Country } from 'entites/Country';
 import Text from 'shared/ui/Text/Text';
 import { TextTheme } from 'shared/ui/Text/Text';
 import { ValidateProfileError } from 'entites/Profile/model/types/profile';
+import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInititalEffect';
+import { useParams } from 'react-router-dom';
 
 const reducers: ReducersList = {
   profile: profileReducer
@@ -38,7 +40,8 @@ const ProfilePage = ({} : ProfilePageProps) => {
   const isLoading = useSelector(getProfilesLoading)
   const readonly = useSelector(getProfileReadonly)
   const validateErrors = useSelector(getProfileValidateErrors)
-
+  const { id } = useParams<{id: string}>() 
+  
   const validateErrorTranslate = {
     [ValidateProfileError.SERVER_ERROR]: t('Серверная ошиба при сохранении'),
     [ValidateProfileError.INCORRECT_AGE]: t('Некоректный возраст'),
@@ -47,11 +50,11 @@ const ProfilePage = ({} : ProfilePageProps) => {
     [ValidateProfileError.NO_DATA]: t('Данные не указаны')
   }
 
-  useEffect(() => {
-    if(__PROJECT__ !== 'storybook'){
-      dispatch(fetchProfileData())
-    }    
-  }, [dispatch])
+  useInitialEffect(() => {
+    if(id){
+      dispatch(fetchProfileData(id))
+    }   
+  })
 
   const onChangeFirstname = useCallback((value?: string) => {
     dispatch(profileActions.updateProfile({first: value || ''}))

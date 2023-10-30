@@ -29,7 +29,9 @@
       "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/80px-Unofficial_JavaScript_logo_2.svg.png",
       "views": 1022,
       "createdAt": "26.02.2022",
-      "type": ["IT"],
+      "type": [
+        "IT"
+      ],
       "blocks": [
         {
           "id": "1",
@@ -110,6 +112,54 @@
       "body": "some comment 3",
       "articleId": "1",
       "userId": "1"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "111",
+      "id": "bqSP6nn"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "body": "123",
+      "id": "fxkO52g"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "body": "yjdsq ",
+      "id": "6VHD5MO"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "body": "asdasd",
+      "id": "aAYpmsX"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "body": "asdasd",
+      "id": "2p_6rWL"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "body": "asd",
+      "id": "vmeJm9o"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "body": "zxc",
+      "id": "UGIrGjx"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "body": "aasdasd",
+      "id": "JJ3tiCL"
     }
   ],
   "users": [
@@ -118,24 +168,29 @@
       "username": "admin",
       "password": "1",
       "role": "ADMIN",
-      "avatar": "https://i.pinimg.com/1200x/2e/2e/21/2e2e2125ee53807c2d77b34773f84b5c.jpg"      
+      "avatar": "https://i.pinimg.com/1200x/2e/2e/21/2e2e2125ee53807c2d77b34773f84b5c.jpg"
     },
     {
       "id": "2",
       "username": "user",
       "password": "1",
       "role": "USER",
-      "avatar": "https://i.pinimg.com/1200x/2e/2e/21/2e2e2125ee53807c2d77b34773f84b5c.jpg"
+      "avatar": "https://uprostim.com/wp-content/uploads/2021/03/image152-28.jpg"
     }
   ],
-  "profile": {
-    "first": "asd",
-    "lastname": "Ledovskikha",
-    "age": 323,
-    "currency": "RUB",
-    "country": "Russia",
-    "city": "Krasnodar",
-    "username": "admin",
-    "avatar": "https://i.pinimg.com/1200x/2e/2e/21/2e2e2125ee53807c2d77b34773f84b5c.jpg"
-  }
+  "profile": [
+    {
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "first": "ьшфыв",
+      "lastname": "ячсячс",
+      "age": 123,
+      "city": "чяссяс",
+      "username": "фыв",
+      "country": "Belarus",
+      "avatar": "https://sneg.top/uploads/posts/2023-06/1687839101_sneg-top-p-avatarka-nik-vkontakte-9.jpg"
+    }
+  ]
 }

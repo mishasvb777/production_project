@@ -18,7 +18,8 @@ const data = {
   country: Country.Russia,
   currency: Currency.RUB,
   first: 'Misha',
-  lastname: 'Ledovskikh'
+  lastname: 'Ledovskikh',
+  id: '1'
 }
 
 describe('updateProfileData.test', () => { 

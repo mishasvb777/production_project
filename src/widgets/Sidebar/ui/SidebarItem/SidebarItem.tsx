@@ -19,12 +19,12 @@ export const SidebarItem = memo(({ item, collapsed }: SidebarItemProps) => {
     
     if(item.authOnly && !isAuth){
         return null
-    } 
-
+    }    
+    
     return (
         <AppLink
             theme={AppLinkTheme.SECONDARY}
-            to={item.path}
+            to={item.path === '/profile/' ? `${item.path}${isAuth?.id}` : item.path}
             className={classNames(cls.item, { [cls.collapsed]: collapsed })}
         >
             <item.Icon className={cls.icon} />
