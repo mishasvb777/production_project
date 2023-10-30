@@ -1,6 +1,7 @@
 export interface User { // описываем тип который нам будет возвращать бекэнд
   id: string,
-  username: string
+  username: string,
+  avatar?: string
 }
 
 export interface UserSchema {

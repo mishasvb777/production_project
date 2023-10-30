@@ -17,6 +17,7 @@ import { ArticleBlock, ArticleBlockType } from 'entites/Article/model/types/arti
 import ArticleCodeBlockComponent from '../ArticleCodeBlockComponent/ArticleCodeBlockComponent';
 import ArticleImageBlockComponent from '../ArticleImageBlockComponent/ArticleImageBlockComponent';
 import ArticleTextBlockComponent from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
+import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInititalEffect';
 
 
 interface ArticleDetailsProps {
@@ -47,11 +48,9 @@ const ArticleDetails = ({className, id}: ArticleDetailsProps) => {
     }
   }, [dispatch])
 
-  useEffect(() => {
-    if(__PROJECT__ !== 'storybook'){
-      dispatch(fetchArticleById(id))
-    }
-  }, [dispatch, id])
+  useInitialEffect(() => {  // получение статьи
+    dispatch(fetchArticleById(id))
+  })
 
   let content;
 
