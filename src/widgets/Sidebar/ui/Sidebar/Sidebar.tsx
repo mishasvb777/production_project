@@ -5,8 +5,9 @@ import { ThemeSwitcher } from 'widgets/ThemeSwitcher'
 import cls from './Sidebar.module.scss'
 import Button, { ButtonSize, ThemeButton } from 'shared/ui/Button/Button'
 import { useTranslation } from 'react-i18next'
-import { SidebarItemsList } from '../../model/items'
 import { SidebarItem } from '../SidebarItem/SidebarItem'
+import { useSelector } from 'react-redux'
+import { getSidebarItems } from '../../model/selectors/getSidebarItems'
 
 
 interface SideBarProps {
@@ -16,6 +17,7 @@ interface SideBarProps {
 const Sidebar = memo(({ className }: SideBarProps) => {
   const [collapsed, setCollapsed] = useState(false) // состояние отвечает за то свернут сайдбар или развернут
 
+  const sidebarItemList = useSelector(getSidebarItems)
   const { t } = useTranslation('translation')  
 
   const onToggle = () => {
@@ -23,14 +25,14 @@ const Sidebar = memo(({ className }: SideBarProps) => {
   }
 
   const itemList = useMemo(() => {
-    return SidebarItemsList.map((item) => (
+    return sidebarItemList.map((item) => (
       <SidebarItem 
         item={item}
         collapsed={collapsed}
         key={item.path}       
       />     
     ))
-  }, [collapsed])
+  }, [collapsed, sidebarItemList])
 
 
      

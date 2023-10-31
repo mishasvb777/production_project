@@ -180,7 +180,13 @@
   ],
   "profile": [
     {
-      "id": "1"
+      "id": "1",
+      "first": "фыв",
+      "lastname": "фыв",
+      "age": 12,
+      "city": "фыв",
+      "username": "фыв",
+      "country": "Belarus"
     },
     {
       "id": "2",
