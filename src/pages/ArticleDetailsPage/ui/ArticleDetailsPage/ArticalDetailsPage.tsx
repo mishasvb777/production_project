@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ArticalDetailsPage.module.scss'
 import ArticleDetails from 'entites/Article/ui/ArticleDetails/ArticleDetails';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Text from 'shared/ui/Text/Text';
 import { CommentList } from 'entites/Comment';
 import DynamicModuleLoader, { ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
@@ -11,9 +11,11 @@ import { articleDetailsCommentsReducer, getArticleComments } from '../../model/s
 import { useDispatch, useSelector } from 'react-redux';
 import { getArticleCommentsIsLoading } from '../../model/selectors/comments';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInititalEffect';
-import { fetchCommentsByArticleId } from 'pages/ArticleDetailsPage/model/services/fetchCommetsByArticleId/fetchCommetsByArticleId';
+import { fetchCommentsByArticleId } from '../../model/services/fetchCommetsByArticleId/fetchCommetsByArticleId';
 import { AddCommentForm } from 'features/AddCommentForm';
-import { addCommentForArticle } from 'pages/ArticleDetailsPage/model/services/addCommentForArticle/addCommentForArticle';
+import { addCommentForArticle } from '../../model/services/addCommentForArticle/addCommentForArticle';
+import Button, { ThemeButton } from 'shared/ui/Button/Button';
+import { RoutePatch } from 'shared/config/routeConfig/routeConfig';
 
 interface ArticalDetailsPageProps {
   className?: string
@@ -28,9 +30,12 @@ const ArticalDetailsPage = ({className}: ArticalDetailsPageProps) => {
   const { id } = useParams<{id: string}>() // c помощью этого хука можно выцеплять значения из строки запроса  
   const comments = useSelector(getArticleComments.selectAll) // здесь вытаскиваем те самые селекторы комментов которые инициализировали в слайсе
   const commentsIsLoading = useSelector(getArticleCommentsIsLoading)
-
-  
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const onBackToList = useCallback(() => {
+    navigate(RoutePatch.articles)
+  }, [navigate])
 
   const onSendComment = useCallback((text: string) => {
     dispatch(addCommentForArticle(text))
@@ -52,6 +57,9 @@ const ArticalDetailsPage = ({className}: ArticalDetailsPageProps) => {
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
       <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
+        <Button theme={ThemeButton.OUTLINE} onClick={onBackToList}>
+          {t('Назад к списку')}
+        </Button>
         <ArticleDetails id={id}/>        
         <Text className={cls.commentTitle} title={t('Комментарий')} />
         <AddCommentForm onSendComment={onSendComment}/>
