@@ -18,13 +18,6 @@ const getSkeletons = (view: ArticleView) => {
 }
 
 export const ArticleList = ({clasName, articles, isLoading, view = ArticleView.PLAYD}: ArticleListProps) => {
-  if(isLoading) {
-    return (
-      <div className={classNames(cls.ArticleList, {}, [clasName, cls[view]])}>
-        { getSkeletons(view) }
-      </div>
-    )
-  }
 
   const renderArticle = (article: Article) => (
     <ArticleListItem clasName={cls.card} article={article} view = {view} key={article.id}/>
@@ -38,6 +31,7 @@ export const ArticleList = ({clasName, articles, isLoading, view = ArticleView.P
           </>
         : null
       }
+      {isLoading && getSkeletons(view)}
     </div>
   );
 };
