@@ -6,6 +6,7 @@ import { userReducer } from "entites/User";
 import { createReducerManager } from "./reducerManager";
 import { $api } from "shared/api/api";
 import { NavigateOptions, To } from "react-router-dom";
+import { scrollSaveReducer } from "features/ScrollSave";
 
 export function createReduxStore( // вынесим создание стора в отдельную функцию для того что мы могли переиспользовать ее, и например для storybook или для jest этот стор отдельно создавать
     initialState?: StateSchema, 
@@ -14,7 +15,8 @@ export function createReduxStore( // вынесим создание стора 
   const rootReducers: ReducersMapObject<StateSchema> = {// для корневого редьюсера (который объединяет все наши редьюсеры) создаем общий объект, так же в корневом редьюсере мы оставляем только обязательные редьюсеры которые должны сразу подгружаться, асинхронные редьюсеры не добавляем 
     ...asyncReducers,
     counter: counterReducer, 
-    user: userReducer   
+    user: userReducer,
+    scrollSave: scrollSaveReducer   
   }
 
   const reducerManager = createReducerManager(rootReducers)

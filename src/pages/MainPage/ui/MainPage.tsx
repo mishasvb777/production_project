@@ -3,7 +3,7 @@ import { Counter } from 'entites/Counter/indext'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Input from 'shared/ui/Input/Input'
-import { Page } from 'shared/ui/Page/Page'
+import { Page } from 'widgets/Page/Page'
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton'
 
 const MainPage = () => {
