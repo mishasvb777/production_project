@@ -10,7 +10,6 @@ import { NavigateOptions, To } from "react-router-dom";
 export function createReduxStore( // вынесим создание стора в отдельную функцию для того что мы могли переиспользовать ее, и например для storybook или для jest этот стор отдельно создавать
     initialState?: StateSchema, 
     asyncReducers?: ReducersMapObject<StateSchema>, 
-    navigate?: (to: To, options?: NavigateOptions) => void
   ) { 
   const rootReducers: ReducersMapObject<StateSchema> = {// для корневого редьюсера (который объединяет все наши редьюсеры) создаем общий объект, так же в корневом редьюсере мы оставляем только обязательные редьюсеры которые должны сразу подгружаться, асинхронные редьюсеры не добавляем 
     ...asyncReducers,
@@ -22,7 +21,6 @@ export function createReduxStore( // вынесим создание стора 
 
   const extraArg: ThunkExtraArg = { //extraArgument - это может быть абсолютно что угодно
     api: $api, // здесь передаем инстанс axios который мы сделали
-    navigate,
   }
 
   const store = configureStore({    
@@ -33,7 +31,6 @@ export function createReduxStore( // вынесим создание стора 
       thunk: { // thunk принимает некоторые опции в который мы экстра аргумент может передать 
         extraArgument: { //extraArgument - это может быть абсолютно что угодно
           api: $api, // здесь передаем инстанс axios который мы сделали
-          navigate,
         }
       }
     })

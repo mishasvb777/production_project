@@ -22,10 +22,6 @@ export const loginByUsername = createAsyncThunk<User, LoginUsernameProps, ThunkC
       localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(response.data))
       dispatch(userActions.setAuthData(response.data))
       
-      if(extra.navigate){
-        extra.navigate('/about') // получается при вызове этой функции мы говорим что после успешного выполения запроса перевели на страницу about
-      }
-      
       return response.data
     }
     catch(e) {

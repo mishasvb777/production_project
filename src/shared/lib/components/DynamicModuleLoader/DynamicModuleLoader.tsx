@@ -21,9 +21,14 @@ const DynamicModuleLoader: FC<DynamicModuleLoaderProps> = ({children, reducers, 
 
    //в момент монтирования компонента мы с помощью reducerManager уазываем какой редьюсер необходимо добавить 
   useEffect(() => {
+    const mountedReducers = store.reducerManager.getMountedReducers()
+
     Object.entries(reducers).forEach(([name, reducer]) => { // в цикле проходимся по массиву reducers и для каждого выполняем функцию
-      store.reducerManager.add(name as StateSchemKey, reducer)
-      dispatch({type: `@INIT ${name} reducer`}) // это нужно для того что бы проверять когда у нас инициализируются редьюсеры
+      const mounted = mountedReducers[name as StateSchemKey]
+      if(!mounted){
+        store.reducerManager.add(name as StateSchemKey, reducer)
+        dispatch({type: `@INIT ${name} reducer`}) // это нужно для того что бы проверять когда у нас инициализируются редьюсеры
+      }      
     })    
     
     return () => { // когда компонент уже не нужен, после демонтирования компонента, мы этот редьюсер снова удаляем 

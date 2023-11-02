@@ -15,10 +15,10 @@ interface StoreProviderProps {
 
 const StoreProvider = ({children, initialState, asyncReducers} : StoreProviderProps) => {
 
-  const navigate = useNavigate() // функиця необходима для того что бы программно можно было управлять роутингом, например полсе успешного входа переходить на страницу пользователя 
 
-  const store = createReduxStore(initialState as StateSchema, asyncReducers as ReducersMapObject<StateSchema>, navigate) // здесь мы создаем сам стор ОСНОВНОЙ для всего приложения
+  const store = createReduxStore(initialState as StateSchema, asyncReducers as ReducersMapObject<StateSchema>) // здесь мы создаем сам стор ОСНОВНОЙ для всего приложения
 
+  console.log
   return (
     <Provider store={store}>
       {children}

@@ -31,16 +31,18 @@ export interface ReduxStoreWithManager extends EnhancedStore<StateSchema> { // E
   reducerManager: ReducerManager
 }
 
+export type MountedReducers = OptionalRecord<StateSchemKey, boolean> // true - редьюсер вмонтирован, false - редьюсер еще не был вмонтирован
+
 export interface ReducerManager {
   getReducerMap: () => ReducersMapObject<StateSchema>, 
   reduce: (state: StateSchema, action: AnyAction) => CombinedState<StateSchema>,
   add: (key: StateSchemKey, reducer: Reducer) => void,
-  remove: (key: StateSchemKey) => void
+  remove: (key: StateSchemKey) => void,
+  getMountedReducers: () => MountedReducers 
 }
 
 export interface ThunkExtraArg { // тип для описания экстра аргументов которые передаем через мидлвары axios
   api: AxiosInstance;
-  navigate?: (to: To, options?: NavigateOptions) => void;
 }
 
 export interface ThunkConfig<T> { // этот тип для описания thunk 
